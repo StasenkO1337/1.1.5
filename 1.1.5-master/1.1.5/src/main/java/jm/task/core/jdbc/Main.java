@@ -12,10 +12,11 @@ public class Main {
         UserDao userDaoHibernate = new UserDaoHibernateImpl();
         userDaoHibernate.createUsersTable();
 
-        userDaoHibernate.saveUser("Ivan", "Ivanov", (byte) 25);
-        userDaoHibernate.saveUser("Petr", "Petrov", (byte) 30);
-        userDaoHibernate.saveUser("Sidor", "Sidorov", (byte) 35);
-        userDaoHibernate.saveUser("Vasilii", "Fet", (byte) 74);
+        userDaoHibernate.saveUser("q1", "q2", (byte) 1);
+        userDaoHibernate.saveUser("w1", "w2", (byte) 2);
+        userDaoHibernate.saveUser("e1", "e2", (byte) 3);
+        userDaoHibernate.saveUser("r1", "r2", (byte) 4);
+        userDaoHibernate.saveUser("t1", "t2", (byte) 5);
 
         userDaoHibernate.removeUserById(2);
 
