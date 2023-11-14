@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -38,9 +39,11 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void dropUsersTable() {
         Transaction transaction = null;
+        String hql = "DELETE FROM User";
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.createNativeQuery("DROP TABLE IF EXISTS users").executeUpdate();
+            Query query = session.createQuery(hql);
+            query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -68,9 +71,12 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         Transaction transaction = null;
+        String hql = "DELETE FROM User WHERE id = :id";
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.delete(session.get(User.class, id));
+            Query query = session.createQuery(hql);
+            query.setParameter("id", id);
+            int result = query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -83,17 +89,19 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         Transaction transaction = null;
-        List<User> list = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            list = session.createQuery("from User").getResultList();
+            String hql = "FROM User";
+            Query query = session.createQuery(hql);
+            List<User> userList = query.list();
             session.getTransaction().commit();
+            return userList;
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return list;
+        return null;
     }
 
     @Override

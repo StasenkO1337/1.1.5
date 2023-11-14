@@ -4,11 +4,9 @@ import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 
 
-import java.sql.SQLException;
-
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args){
         UserDao userDaoHibernate = new UserDaoHibernateImpl();
         userDaoHibernate.createUsersTable();
 
@@ -20,7 +18,7 @@ public class Main {
 
         userDaoHibernate.removeUserById(2);
 
-        userDaoHibernate.getAllUsers();
+        System.out.println(userDaoHibernate.getAllUsers());
 
         userDaoHibernate.cleanUsersTable();
 
