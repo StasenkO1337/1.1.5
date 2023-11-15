@@ -10,15 +10,15 @@ public class Main {
         UserDao userDaoHibernate = new UserDaoHibernateImpl();
         userDaoHibernate.createUsersTable();
 
-        userDaoHibernate.saveUser("q1", "q2", (byte) 1);
-        userDaoHibernate.saveUser("w1", "w2", (byte) 2);
-        userDaoHibernate.saveUser("e1", "e2", (byte) 3);
-        userDaoHibernate.saveUser("r1", "r2", (byte) 4);
-        userDaoHibernate.saveUser("t1", "t2", (byte) 5);
+        userDaoHibernate.saveUser("a1", "b1", (byte) 1);
+        userDaoHibernate.saveUser("a2", "b2", (byte) 2);
+        userDaoHibernate.saveUser("a3", "b3", (byte) 3);
+        userDaoHibernate.saveUser("a4", "b4", (byte) 4);
+        userDaoHibernate.saveUser("a5", "b5", (byte) 5);
 
         userDaoHibernate.removeUserById(2);
 
-        System.out.println(userDaoHibernate.getAllUsers());
+        userDaoHibernate.getAllUsers().forEach(System.out::println);
 
         userDaoHibernate.cleanUsersTable();
 
